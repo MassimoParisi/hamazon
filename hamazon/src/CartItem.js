@@ -1,46 +1,105 @@
 import styled from 'styled-components'
 import React from 'react'
 
-function CartItem() {
+function CartItem({id, item}) {
+
+    let options = []
+
+    for(let i = 1; i < Math.max(item.quantity+1, 20); i++){
+        options.push(<option value={i}> Qty: {i}</option>)
+    }
+
     return (
         <Container>
             <ItemImage>
-                <img src={"https://m.media-amazon.com/images/I/311InFAmDML._AC_UL640_FMwebp_QL65_.jpg"} />
+                <img src={item.image} />
             </ItemImage>
 
             <ItemInfo>
                 <ItemInfoTop>
                     <h2>
-                        Prodotto 1
+                        {item.name}
                     </h2>
-
                 </ItemInfoTop>
                 <ItemInfoBottom>
-                    <ItemQuantityContainer></ItemQuantityContainer>
-                    <ItemDelete></ItemDelete>
+                    <ItemQuantityContainer>
+                        <select value= {item.quantity}>
+                            {options}
+                        </select>
+                    </ItemQuantityContainer>
+                    <ItemDelete>Delete</ItemDelete>
                 </ItemInfoBottom>
 
             </ItemInfo>
 
-            <ItemPrice></ItemPrice>
+            <ItemPrice>€{item.price}</ItemPrice>
         </Container>
     )
 }
 
 export default CartItem
 
-const Container = styled.div``
+const Container = styled.div`
+padding-top: 12px;
+padding-bottom: 12px;
+display: flex;
+border-bottom: 1px solid #DDD
+`
 
-const ItemImage = styled.div``
+const ItemImage = styled.div`
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin-right: 16px;
 
-const ItemInfo = styled.div``
+    img {
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+    }
+`
 
-const ItemInfoTop = styled.div``
+const ItemInfo = styled.div`
+    flex-grow: 1;
+`
 
-const ItemInfoBottom = styled.div``
+const ItemInfoTop = styled.div`
+    color: #007185;
 
-const ItemQuantityContainer = styled.div``
+    h2 {
+        font-size: 18px;
+    }
+`
 
-const ItemDelete = styled.div``
+const ItemInfoBottom = styled.div`
+    display: flex;
+    margin-top: 4px;
+    align-items: center;
+`
 
-const ItemPrice = styled.div``
+const ItemQuantityContainer = styled.div`
+    select {
+        border-radius: 7px;
+        background-color: #F0F2F2;
+        padding: 8px;
+        box-shadow: 0 2px 5px rgba(15, 17, 17, 15);
+
+        :focus {
+            outline: none;
+        }
+    }
+`
+
+const ItemDelete = styled.div`
+    color: #007185;
+    margin-left: 16px;
+    cursor: pointer;
+
+`
+
+const ItemPrice = styled.div`
+    font-size: 18px;
+    font-weight: 700;
+    margin-left: 16px;
+`
