@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components';
 import sp_cover from './assets/home_cover.png';
 import Product from './Product';
-import db from './firebase';
+import { db } from './firebase';
 
 function Home() {
     const[products, setProducts] = useState([])
